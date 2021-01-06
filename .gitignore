@@ -362,3 +362,17 @@ MigrationBackup/
 FodyWeavers.xsd
 
 .idea/.idea.NerdStore/.idea/
+
+src/services/Identity/NS.Identity.API/obj/
+
+src/services/NS.Cart.API/obj/
+
+src/services/NS.Catalog.API/obj/
+
+src/services/NS.Client.API/obj/
+
+src/services/NS.Order.API/obj/
+
+src/services/NS.Payment.API/obj/
+
+src/web/NS.WebApp.MVC/obj/

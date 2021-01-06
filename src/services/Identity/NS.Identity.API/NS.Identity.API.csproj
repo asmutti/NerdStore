@@ -2,7 +2,31 @@
 
     <PropertyGroup>
         <TargetFramework>netcoreapp3.1</TargetFramework>
+        <UserSecretsId>db8164df-2464-408f-9dc5-d9caffac534c</UserSecretsId>
+        <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+        <DockerFileContext>../../..</DockerFileContext>
     </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="EntityFrameworkCore.CommonTools" Version="2.0.2" />
+      <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.9" />
+      <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="3.1.10" />
+      <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.10" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.10" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore.Abstractions" Version="3.1.10" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.10">
+        <PrivateAssets>all</PrivateAssets>
+        <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      </PackageReference>
+      <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="3.1.10" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.10" />
+      <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.10.8" />
+      <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Configuration" />
+    </ItemGroup>
 
 
 </Project>
