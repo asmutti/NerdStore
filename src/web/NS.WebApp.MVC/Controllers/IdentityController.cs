@@ -1,12 +1,19 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using NS.WebApp.MVC.Models;
+using NS.WebApp.MVC.Service;
 
 namespace NS.WebApp.MVC.Controllers
 {
     public class IdentityController : Controller
     {
-        
+        private readonly IAuthService _authService;
+
+        public IdentityController(IAuthService authService)
+        {
+            _authService = authService;
+        }
+
         [HttpGet("new-account")]
         public async Task<IActionResult> Register()
         {
@@ -20,6 +27,7 @@ namespace NS.WebApp.MVC.Controllers
                 return View(userRegisterModel);
             
             //API Register
+            var response = await _authService.Register(userRegisterModel);
 
             if (false)
                 return View(userRegisterModel);
@@ -42,6 +50,8 @@ namespace NS.WebApp.MVC.Controllers
                 return View(userLoginModel);
             
             //API Register
+
+            var response = await _authService.Login(userLoginModel);
 
             if (false)
                 return View(userLoginModel);

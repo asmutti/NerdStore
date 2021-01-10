@@ -24,6 +24,8 @@ namespace NS.WebApp.MVC
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvcConfiguration();
+            
+            services.RegisterServices();
         }
         
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

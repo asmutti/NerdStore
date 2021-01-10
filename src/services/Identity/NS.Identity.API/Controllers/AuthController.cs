@@ -6,7 +6,7 @@ using NS.Identity.API.Services;
 
 namespace NS.Identity.API.Controllers
 {
-    [Route("api/identiy")]
+    [Route("api/identity")]
     public class AuthController : MainController
     {
         private readonly SignInManager<IdentityUser> _signInManager;

@@ -1,7 +1,7 @@
 ﻿@model NS.WebApp.MVC.Models.UserRegisterModel
 
 @{
-    ViewData["Title"] = "Registro";
+    ViewData["Title"] = "Register";
 }
 
 <h1>@ViewData["Title"]</h1>
@@ -16,7 +16,7 @@
 
                 <div class="form-group">
                     <label asp-for="Email"></label>
-                    @* <input asp-for="Email" class="form-control" /> *@
+                    <input asp-for="Email" class="form-control" />
                     <span asp-validation-for="Email" class="text-danger"></span>
                 </div>
                 <div class="form-group">
