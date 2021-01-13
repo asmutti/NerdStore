@@ -13,5 +13,8 @@ namespace NS.WebApp.MVC.Models
         
         [JsonPropertyName("userToken")]
         public UserTokenModel UserToken { get; set; }
+        
+        [JsonPropertyName("responseResult")]
+        public ResponseResultModel ResponseResult { get; set; }
     }
 }

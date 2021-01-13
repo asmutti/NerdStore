@@ -7,7 +7,7 @@ using NS.WebApp.MVC.Models;
 
 namespace NS.WebApp.MVC.Service
 {
-    public class AuthService : IAuthService
+    public class AuthService : Service, IAuthService
     {
         private readonly HttpClient _httpClient;
 
@@ -25,10 +25,19 @@ namespace NS.WebApp.MVC.Service
 
             var response = await _httpClient.PostAsync("https://localhost:5001/api/identity/auth", loginContent);
 
+            if (!HandleResponseErrors(response))
+            {
+                return new UserLoginResponseModel
+                {
+                    ResponseResult =
+                        JsonSerializer.Deserialize<ResponseResultModel>(await response.Content.ReadAsStringAsync())
+                };
+            }
+
             return JsonSerializer.Deserialize<UserLoginResponseModel>(await response.Content.ReadAsStringAsync());
         }
 
-        public async Task<string> Register(UserRegisterModel userRegisterModel)
+        public async Task<UserLoginResponseModel> Register(UserRegisterModel userRegisterModel)
         {
             var registerContent = new StringContent(
                 JsonSerializer.Serialize(userRegisterModel), 
@@ -36,8 +45,17 @@ namespace NS.WebApp.MVC.Service
                 "application/json");
 
             var response = await _httpClient.PostAsync("https://localhost:44340/api/identity/new-account", registerContent);
+            
+            if (!HandleResponseErrors(response))
+            {
+                return new UserLoginResponseModel
+                {
+                    ResponseResult =
+                        JsonSerializer.Deserialize<ResponseResultModel>(await response.Content.ReadAsStringAsync())
+                };
+            }
 
-            return JsonSerializer.Deserialize<string>(await response.Content.ReadAsStringAsync());
+            return JsonSerializer.Deserialize<UserLoginResponseModel>(await response.Content.ReadAsStringAsync());
         }
     }
 }

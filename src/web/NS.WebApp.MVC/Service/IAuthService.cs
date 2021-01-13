@@ -7,6 +7,6 @@ namespace NS.WebApp.MVC.Service
     {
         Task<UserLoginResponseModel> Login(UserLoginModel userLoginModel);
 
-        Task<string> Register(UserRegisterModel userRegisterModel);
+        Task<UserLoginResponseModel> Register(UserRegisterModel userRegisterModel);
     }
 }
