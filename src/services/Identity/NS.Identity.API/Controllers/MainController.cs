@@ -18,7 +18,7 @@ namespace NS.Identity.API.Controllers
 
             return BadRequest(new ValidationProblemDetails(new Dictionary<string, string[]>
             {
-                {"Messages", Errors.ToArray()}
+                {"messages", Errors.ToArray()}
             }));
         }
 
