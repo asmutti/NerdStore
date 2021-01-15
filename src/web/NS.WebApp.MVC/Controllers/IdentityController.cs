@@ -46,19 +46,19 @@ namespace NS.WebApp.MVC.Controllers
         }
 
         [HttpGet("login")]
-        public async Task<IActionResult> Login()
+        public async Task<IActionResult> Login(string returnUrl = null)
         {
+            ViewData["ReturnUrl"] = returnUrl;
             return View();
         }
         
         [HttpPost("login")]
-        public async Task<IActionResult> Login(UserLoginModel userLoginModel)
+        public async Task<IActionResult> Login(UserLoginModel userLoginModel, string returnUrl = null)
         {
             if (!ModelState.IsValid)
                 return View(userLoginModel);
              
             //API Register
-
             var userLoginResponseModel = await _authService.Login(userLoginModel);
 
             if (ResponseHasErrors(userLoginResponseModel.ResponseResult))
@@ -66,12 +66,16 @@ namespace NS.WebApp.MVC.Controllers
 
             await DoLogin(userLoginResponseModel);
 
-            return RedirectToAction("Index", "Home");
+            return string.IsNullOrEmpty(returnUrl) 
+                ? RedirectToAction("Index", "Home") 
+                : RedirectToAction(returnUrl);
         }
         
         [HttpGet("logout")]
         public async Task<IActionResult> Logout()
         {
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            
             return RedirectToAction("Index", "Home");
         }
 

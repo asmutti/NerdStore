@@ -1,17 +1,21 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using NS.WebApp.MVC.Extensions;
 
 namespace NS.WebApp.MVC.Configuration
 {
     public static class WebAppConfiguration
     {
-        public static void AddMvcConfiguration(this IServiceCollection services)
+        public static void AddMvcConfiguration(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddIdentityConfiguration();
             
             services.AddControllersWithViews();
+
+            services.Configure<AppSettings>(configuration);
         }
 
         public static void UseMvcConfiguration(this IApplicationBuilder app, IWebHostEnvironment env)
@@ -22,7 +26,8 @@ namespace NS.WebApp.MVC.Configuration
             }
             else
             {
-                app.UseExceptionHandler("/Home/Error");
+                app.UseExceptionHandler("/error/500");
+                app.UseStatusCodePagesWithRedirects("error/{0}");
                 app.UseHsts();
             }
 
@@ -34,6 +39,8 @@ namespace NS.WebApp.MVC.Configuration
             app.UseIdentityConfiguration();
 
             app.UseAuthorization();
+
+            app.UseMiddleware<ExceptionMiddleware>();
 
             app.UseEndpoints(endpoints =>
             {

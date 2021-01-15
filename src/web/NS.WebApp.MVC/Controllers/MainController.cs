@@ -8,7 +8,16 @@ namespace NS.WebApp.MVC.Controllers
     {
         public bool ResponseHasErrors(ResponseResultModel responseResult)
         {
-            return responseResult != null && responseResult.Errors.Messages.Any();
+            if (responseResult == null || !responseResult.Errors.Messages.Any()) 
+                return false;
+            
+            foreach (var message in responseResult.Errors.Messages)
+            {
+                ModelState.AddModelError(string.Empty, message);
+            }
+
+            return true;
+
         }
     }
 }
